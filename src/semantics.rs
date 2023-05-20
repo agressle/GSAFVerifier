@@ -7,6 +7,7 @@ use crate::parsers::file_reader::LineInterpreter;
 ///Represents the semantics of the instance
 #[derive(Clone)]
 pub enum Semantics {
+    ConflictFree,
     Admissible,
     Stable
 }
@@ -28,6 +29,7 @@ impl ValueEnum for Semantics {
 
     fn to_possible_value(&self) -> Option<PossibleValue> {
         match self {
+            Semantics::ConflictFree => Some(PossibleValue::new("ConflictFree")),
             Semantics::Admissible => Some(PossibleValue::new("Admissible")),
             Semantics::Stable => Some(PossibleValue::new("Stable"))
         }
@@ -39,15 +41,9 @@ impl Semantics {
     /// Returns the starts index in the proof line and verifier to use for a given type of semantics and proof line.
     pub fn get_verifier(&self, line: &String) -> Option<(usize, VerifierType)> {
         match self {
+            Semantics::ConflictFree => Some((0, VerifierType::RUP)),
             Semantics::Admissible => Self::get_verifier_admissible(line),
             Semantics::Stable => Self::get_verifier_stable(line),
-        }
-    }
-
-    fn get_verifier_stable(line: &String) -> Option<(usize, VerifierType)> {
-        match line {
-            l if l.starts_with("i ") => Some((2, VerifierType::Stability)),
-            _ => Some((0, VerifierType::RUP))
         }
     }
 
@@ -75,6 +71,13 @@ impl Semantics {
                     None
                 }
             },
+            _ => Some((0, VerifierType::RUP))
+        }
+    }
+
+    fn get_verifier_stable(line: &String) -> Option<(usize, VerifierType)> {
+        match line {
+            l if l.starts_with("i ") => Some((2, VerifierType::Stability)),
             _ => Some((0, VerifierType::RUP))
         }
     }
