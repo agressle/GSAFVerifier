@@ -24,7 +24,7 @@ pub trait LineInterpreterDeterminer {
 
 impl ValueEnum for Semantics {
     fn value_variants<'a>() -> &'a [Self] {
-        &[Semantics::Admissible, Semantics::Stable]
+        &[Semantics::Admissible, Semantics::ConflictFree, Semantics::Stable]
     }
 
     fn to_possible_value(&self) -> Option<PossibleValue> {
