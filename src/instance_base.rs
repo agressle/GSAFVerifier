@@ -260,7 +260,7 @@ impl InstanceBase {
                         }
                         (argument_number - 1, !is_negative)
                     },
-                2 => { //The argument name
+                _ => { //The argument name
                         if split[0] != "s" {
                             return Err(format!("The line '{}' in the arguments file is malformed", line))
                         }
@@ -286,7 +286,6 @@ impl InstanceBase {
                             return Err(format!("The required argument file references argument name '{}' that is invalid", argument_string));
                         }
                     }
-                _ => return Err(format!("The line '{}' in the arguments file is malformed", line))
             };
 
             required_arguments.push(required_argument);
