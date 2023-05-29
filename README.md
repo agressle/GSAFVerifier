@@ -11,13 +11,13 @@ Usage: verifier [OPTIONS] --instance `<FILE>` --proof `<FILE>` --semantics `<SEM
 
 Options:
   * -i, --instance `<FILE>`\
-     A file that contains the encoding of the instance. 
+     A file that contains the encoding of the instance, see also: [instance file format](https://github.com/agressle/GSAFSolver#instance-file-format).
   * -d, --description `<FILE>`\
-     A file that contains the instance description.
+     A file that contains the instance description, see also: [description file format](https://github.com/agressle/GSAFSolver#description-file-format).
   * -p, --proof `<FILE>`\
      A file that contains the proof.
   * -r, --required `<FILE>`\
-     A file that contains the required arguments. 
+     A file that contains the required arguments, see also: [required arguments file format](https://github.com/agressle/GSAFSolver#required-arguments-file-format).  
   * -s, --semantics `<SEMANTICS>`\
      The semantics that the proof adheres to. [possible values: Admissible, ConflictFree, Stable]
   * -t, --timeout `<TIMEOUT>`\
